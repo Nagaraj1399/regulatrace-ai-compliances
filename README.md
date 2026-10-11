@@ -27,8 +27,8 @@
 
 | Member | Role | Key Contributions |
 | :--- | :--- | :--- |
+| **Nagarajan R** | Lead Full-Stack Architect & Compliance Systems Engineer | Regulatory lineage schema design, 3LoD governance barrier logic, audit ledger verification, and domain test automation. |
 | **Nifasath Farhana K** | Lead AI Engineer & Full-Stack Architect | Agentic Gemini ingestion pipeline, 4-factor matching engine, React 19 UI architecture, and end-to-end cloud deployment. |
-| **Subraja S** | Compliance Systems & Domain Engineer | Regulatory lineage schema design, 3LoD governance barrier logic, audit ledger verification, and domain test automation. |
 
 ---
 

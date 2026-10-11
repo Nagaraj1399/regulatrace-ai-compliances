@@ -1,0 +1,8 @@
+{
+  "name": "RegulaTrace AI",
+  "description": "AI-Powered Regulatory Obligation-to-Control Traceability Matrix & Compliance Workbench for Accenture Hackathon.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

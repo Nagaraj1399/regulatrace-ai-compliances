@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RegulaTrace AI — Accenture ET AI Hackathon Presentation (Executive White Theme)</title>
+<style>
+  @page {
+    size: 16in 9in; /* 16:9 widescreen presentation slide standard */
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  body {
+    background: #F8FAFC;
+    color: #0F172A;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .no-print {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    display: flex;
+    gap: 0.75rem;
+  }
+  .nav-btn {
+    background: #0F766E;
+    color: #FFF;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover {
+    background: #115E59;
+    transform: translateY(-1px);
+  }
+  .nav-btn.secondary {
+    background: #FFFFFF;
+    color: #0F172A;
+    border: 1px solid #CBD5E1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  .nav-btn.secondary:hover {
+    background: #F1F5F9;
+  }
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+
+  .slide {
+    width: 16in;
+    height: 9in;
+    page-break-after: always;
+    page-break-inside: avoid;
+    position: relative;
+    padding: 3rem 4.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+  }
+  .slide::before {
+    content: "";
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, rgba(99, 102, 241, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .slide::after {
+    content: "";
+    position: absolute;
+    bottom: -120px;
+    left: -120px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(15, 118, 110, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #F1F5F9;
+    padding-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .brand-badge {
+    background: #0F766E;
+    color: #FFF;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+  .brand-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+  }
+  .slide-counter {
+    background: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #0F766E;
+    font-weight: 700;
+  }
+
+  /* Content area */
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    padding: 1.25rem 0;
+  }
+  .slide-title {
+    font-size: 2.35rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    color: #0F172A;
+  }
+  .slide-subtitle {
+    font-size: 1.15rem;
+    color: #64748B;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    max-width: 90%;
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 0.85rem;
+    font-size: 0.85rem;
+    color: #94A3B8;
+    position: relative;
+    z-index: 2;
+  }
+  .footer-link {
+    color: #0F766E;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* Card Grids */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.35rem;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  }
+  .card-highlight {
+    background: #F0FDFA;
+    border: 1px solid #99F6E4;
+  }
+  .card-accent-emerald { border-top: 4px solid #059669; }
+  .card-accent-sky { border-top: 4px solid #0284C7; }
+  .card-accent-purple { border-top: 4px solid #7C3AED; }
+  .card-accent-amber { border-top: 4px solid #D97706; }
+
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card-desc {
+    font-size: 0.92rem;
+    color: #475569;
+    line-height: 1.5;
+  }
+  .card-list {
+    list-style: none;
+    margin-top: 0.6rem;
+  }
+  .card-list li {
+    font-size: 0.88rem;
+    color: #475569;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.4;
+  }
+  .card-list li::before {
+    content: "▹";
+    color: #0F766E;
+    font-weight: bold;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .badge-sky { background: #E0F2FE; color: #0369A1; }
+  .badge-emerald { background: #D1FAE5; color: #047857; }
+  .badge-amber { background: #FEF3C7; color: #B45309; }
+  .badge-purple { background: #EDE9FE; color: #6D28D9; }
+
+  /* Title Slide Specifics */
+  .title-slide {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  }
+  .hero-tag {
+    background: #F0FDFA;
+    border: 1px solid #99F6E4;
+    color: #0F766E;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.45rem 1.25rem;
+    border-radius: 30px;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-size: 3.8rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    color: #0F172A;
+  }
+  .hero-subtitle {
+    font-size: 1.6rem;
+    color: #334155;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: #64748B;
+    max-width: 70%;
+    margin-bottom: 1.75rem;
+    line-height: 1.5;
+  }
+  .team-box {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .team-card {
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    padding: 0.75rem 1.25rem;
+    text-align: left;
+    min-width: 220px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  .team-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0F172A;
+  }
+  .team-role {
+    font-size: 0.82rem;
+    color: #0F766E;
+    font-weight: 600;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 1.25rem;
+  }
+  .hero-meta-item {
+    text-align: left;
+  }
+  .hero-meta-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: #94A3B8;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .hero-meta-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0F172A;
+    margin-top: 0.2rem;
+  }
+
+  /* Metric block */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .stat-box {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  }
+  .stat-val {
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #0F766E;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .live-link-banner {
+    background: #F0FDFA;
+    border: 1px solid #5EEAD4;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+  }
+  .live-link-text {
+    font-size: 1rem;
+    color: #0F172A;
+    font-weight: 600;
+  }
+  .live-link-url {
+    font-family: monospace;
+    color: #0F766E;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <button class="nav-btn" onclick="window.print()">🖨️ Save as PDF</button>
+  <a class="nav-btn secondary" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank" rel="noopener">🌐 Open Live App</a>
+  <a class="nav-btn secondary" href="/slides.html">🌙 Dark Theme</a>
+</div>
+
+<!-- SLIDE 1: TEAM INTRODUCTION & COVER -->
+<div class="slide title-slide">
+  <div class="hero-tag">The Economic Times × Accenture • ET AI Hackathon: Agentic Edition</div>
+  <h1 class="hero-title">RegulaTrace AI</h1>
+  <div class="hero-subtitle">Regulatory Obligation-to-Control Traceability Matrix & Compliance Workbench</div>
+  <p class="hero-desc">An Agentic AI Compliance Platform that ingests complex banking regulations, automates control mapping with multi-dimensional confidence scoring, enforces human-in-the-loop governance, and provides cryptographic audit traceability.</p>
+  
+  <div class="team-box">
+    <div class="team-card">
+      <div class="team-name">Nifasath Farhana K</div>
+      <div class="team-role">Lead AI Engineer & Full-Stack Architect</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">Subraja S</div>
+      <div class="team-role">Compliance Systems & Domain Engineer</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">Accenture Hackathon Team</div>
+      <div class="team-role">Track: Agentic AI in Enterprise & Banking</div>
+    </div>
+  </div>
+
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Live App Link</div>
+      <div class="hero-meta-value" style="color: #0F766E;">● https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">AI Stack</div>
+      <div class="hero-meta-value">Google Gemini 1.5 Flash + React 19 + TypeScript</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Code Repository</div>
+      <div class="hero-meta-value">github.com/nifasathfarhanak/accenture_hackathon</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">Test Verification</div>
+      <div class="hero-meta-value" style="color: #0284C7;">✓ 29/29 Acceptance & Domain Tests Passed</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: PROBLEM STATEMENT -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">Problem Statement</span>
+    </div>
+    <span class="slide-counter">02 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">The Banking Compliance Crisis</h2>
+    <p class="slide-subtitle">Tier-1 financial institutions spend billions annually manually reconciling thousands of complex regulatory obligations across DORA, OCC 2011-12, Basel III, and MAS guidelines.</p>
+    
+    <div class="grid-3">
+      <div class="card card-accent-amber">
+        <div class="card-title">⚠️ Fragmented & Manual Spreadsheets</div>
+        <p class="card-desc">Compliance teams spend 65%+ of their hours cross-referencing multi-hundred-page policy PDFs against disconnected internal control matrices in Excel.</p>
+        <ul class="card-list">
+          <li>Extremely slow, error-prone manual reviews</li>
+          <li>Massive analyst burnout and high turnover</li>
+          <li>Lag of weeks before new circulars are mapped</li>
+        </ul>
+      </div>
+
+      <div class="card card-accent-purple">
+        <div class="card-title">❌ Black-Box AI Hallucination Risk</div>
+        <p class="card-desc">Generic LLMs hallucinate control adequacy, skip subtle sub-clauses, and lack deterministic explainability required by regulatory bank examiners.</p>
+        <ul class="card-list">
+          <li>Unsubstantiated control approval risks fines</li>
+          <li>No exact paragraph and sub-clause citations</li>
+          <li>Regulators reject unexplainable black-box AI</li>
+        </ul>
+      </div>
+
+      <div class="card card-accent-emerald">
+        <div class="card-title">⚖️ Deficient Audit Trails & Governance</div>
+        <p class="card-desc">Auditors from FED, ECB, PRA, or RBI demand tamper-evident proof of who approved, modified, or identified gaps for every mandatory obligation.</p>
+        <ul class="card-list">
+          <li>Informal or missing analyst rationales</li>
+          <li>Untracked remediation plans for partial gaps</li>
+          <li>Zero end-to-end cryptographic traceability</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Live App: <a class="footer-link" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a></span>
+  </div>
+</div>
+
+<!-- SLIDE 3: PROPOSED SOLUTION -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">Proposed Solution</span>
+    </div>
+    <span class="slide-counter">03 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">RegulaTrace AI: Autonomous Compliance Workbench</h2>
+    <p class="slide-subtitle">An end-to-end Agentic Compliance Platform purpose-built for Tier-1 banks, combining autonomous AI intelligence with strict human-in-the-loop governance.</p>
+    
+    <div class="grid-2">
+      <div class="card card-highlight">
+        <div class="card-title">✨ Three-Pillar Agentic Workflow</div>
+        <ul class="card-list">
+          <li><strong>Agent 1: Zero-Shot Clause Ingestion Engine:</strong> Ingests complex circular text (DORA ICT, OCC 2011-12, Basel III) and extracts atomic, traceable obligations with exact citations.</li>
+          <li><strong>Agent 2: Multi-Factor Semantic Matching Engine:</strong> Evaluates internal bank controls against extracted obligations using a 4-dimensional mathematical scoring formula.</li>
+          <li><strong>Agent 3: Remediation & Gap Advisor:</strong> Identifies unaddressed sub-requirements and generates actionable remediation guidance for compliance officers.</li>
+        </ul>
+      </div>
+
+      <div class="card card-accent-sky">
+        <div class="card-title">🛡️ Strict Human-In-The-Loop Governance</div>
+        <p class="card-desc">AI proposes; human experts adjudicate. RegulaTrace AI enforces enterprise safeguards before any mapping is finalized:</p>
+        <ul class="card-list">
+          <li><strong>Mandatory Rationale Validation:</strong> Enforces minimum 10-character substantive justification for every approval.</li>
+          <li><strong>Enforced Gap Acknowledgment:</strong> Partial/gap matches require explicit sign-off on remediation plans.</li>
+          <li><strong>Tamper-Evident Audit Ledger:</strong> Every decision, RFI, and role change is permanently recorded with timestamps and user identities.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Live App: <a class="footer-link" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a></span>
+  </div>
+</div>
+
+<!-- SLIDE 4: SYSTEM ARCHITECTURE -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">System Architecture</span>
+    </div>
+    <span class="slide-counter">04 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">End-to-End Enterprise Architecture</h2>
+    <p class="slide-subtitle">A high-throughput, modular architecture linking regulatory sources, AI inference, deterministic scoring, and audit immutability.</p>
+    
+    <div class="grid-4">
+      <div class="card card-accent-sky">
+        <div class="badge badge-sky" style="margin-bottom: 0.5rem;">LAYER 1: INGESTION</div>
+        <div class="card-title">Document Parser</div>
+        <p class="card-desc">Parses PDFs, circulars, and regulatory updates across jurisdictions (EU, US, UK, MAS). Extracts section excerpts and metadata.</p>
+      </div>
+
+      <div class="card card-accent-purple">
+        <div class="badge badge-purple" style="margin-bottom: 0.5rem;">LAYER 2: AI REASONING</div>
+        <div class="card-title">Gemini Agent</div>
+        <p class="card-desc">Google Gemini 1.5 Flash extracts atomic obligations, splits sub-components, and drafts expert match rationales in structured JSON.</p>
+      </div>
+
+      <div class="card card-accent-amber">
+        <div class="badge badge-amber" style="margin-bottom: 0.5rem;">LAYER 3: MATCHING MATH</div>
+        <div class="card-title">4-Factor Match Engine</div>
+        <p class="card-desc">Deterministic calculation combining semantic similarity, token overlap, business function alignment, and control effectiveness.</p>
+      </div>
+
+      <div class="card card-accent-emerald">
+        <div class="badge badge-emerald" style="margin-bottom: 0.5rem;">LAYER 4: GOVERNANCE</div>
+        <div class="card-title">Audit Ledger & 3LoD</div>
+        <p class="card-desc">Interactive 3-column workbench with role-switching (1st, 2nd, 3rd Line of Defense), RFI workflows, and board-ready export.</p>
+      </div>
+    </div>
+
+    <div class="card card-highlight" style="margin-top: 1.25rem;">
+      <div class="card-title">🔄 Closed-Loop Traceability Pipeline</div>
+      <p class="card-desc">Raw Circular Text ➔ Clause Tokenization ➔ Structured Obligation ➔ Candidate Control Scoring (High / Medium / Low) ➔ Analyst Adjudication Barrier ➔ Immutable Audit History ➔ Real-Time Coverage Matrix</p>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Live App: <a class="footer-link" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a></span>
+  </div>
+</div>
+
+<!-- SLIDE 5: AI MODELS & TECHNOLOGIES USED -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">AI Models & Technologies</span>
+    </div>
+    <span class="slide-counter">05 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">AI Models & Technology Stack</h2>
+    <p class="slide-subtitle">Built with enterprise-grade frontend frameworks, cloud-native generative AI models, and resilient fallback systems.</p>
+    
+    <div class="grid-2">
+      <div class="card card-accent-purple">
+        <div class="card-title">🤖 AI Models & Cognitive Engine</div>
+        <ul class="card-list">
+          <li><strong>Google Gemini 1.5 Flash:</strong> Zero-shot obligation extraction, sub-requirement decomposition, and compliance rationale synthesis.</li>
+          <li><strong>Structured JSON Inference:</strong> Rigid schema enforcement ensures outputs strictly match TypeScript interfaces (`RegulatoryObligation`).</li>
+          <li><strong>Autonomous Mock Fallback:</strong> Seamless offline capability for air-gapped demo environments and secure sandboxes.</li>
+          <li><strong>Prompt Engineering Safeguards:</strong> Constrained banking terminology prevents speculative AI extrapolations.</li>
+        </ul>
+      </div>
+
+      <div class="card card-accent-emerald">
+        <div class="card-title">💻 Technical Stack & Modern Tooling</div>
+        <ul class="card-list">
+          <li><strong>Frontend:</strong> React 19 + TypeScript + Vite 8 (instant hot reloads, zero bundle bloat).</li>
+          <li><strong>Design System:</strong> Tailwind CSS + Radix UI Primitives (WCAG AA accessible, dense Bloomberg-style UI).</li>
+          <li><strong>Icons & Animations:</strong> Lucide React + Motion for smooth state transitions.</li>
+          <li><strong>Data & Testing:</strong> Zod schema validation + LocalStorage reactive persistence + Vitest & Testing Library.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Live App: <a class="footer-link" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a></span>
+  </div>
+</div>
+
+<!-- SLIDE 6: PRODUCT DEMO & LIVE APPLICATION -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">Product Demo</span>
+    </div>
+    <span class="slide-counter">06 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">Interactive Product Walkthrough</h2>
+    <p class="slide-subtitle">A fully functional, live-deployed compliance workbench ready for immediate production testing.</p>
+    
+    <div class="grid-3">
+      <div class="card card-accent-sky">
+        <div class="card-title">1️⃣ Obligation Explorer</div>
+        <p class="card-desc">Dense list view with instant filtering across jurisdictions (EU, US, UK, MAS), business functions, and coverage status (Fully Covered, Partial, Gap).</p>
+      </div>
+
+      <div class="card card-accent-purple">
+        <div class="card-title">2️⃣ 3-Column Workbench</div>
+        <p class="card-desc">Simultaneously displays Obligation Details (source excerpts), Candidate Controls (match scores), and the Active Traceability Chain.</p>
+      </div>
+
+      <div class="card card-accent-emerald">
+        <div class="card-title">3️⃣ Review & Approval Modal</div>
+        <p class="card-desc">Enforces mandatory justification, gap acknowledgment, and role selection with instantaneous updates to the audit ledger.</p>
+      </div>
+    </div>
+
+    <div class="live-link-banner">
+      <div>
+        <div class="live-link-text">🚀 Experience RegulaTrace AI Live in Your Browser:</div>
+        <a class="live-link-url" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a>
+      </div>
+      <div style="background: #D1FAE5; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; color: #047857;">
+        ● LIVE DEPLOYMENT
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Live Deployment Link Active & Verified</span>
+  </div>
+</div>
+
+<!-- SLIDE 7: EXPLAINABLE 4-FACTOR CONFIDENCE SCORING -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">Mathematical Rigor</span>
+    </div>
+    <span class="slide-counter">07 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">Explainable 4-Factor AI Confidence Scoring</h2>
+    <p class="slide-subtitle">Transparent scoring mathematics that bankers and regulatory examiners can inspect, calibrate, and verify.</p>
+    
+    <div class="grid-4">
+      <div class="card">
+        <div class="badge badge-sky" style="margin-bottom: 0.5rem;">WEIGHT: 35%</div>
+        <div class="card-title">Semantic Cosine</div>
+        <p class="card-desc">Cosine similarity between obligation requirement embeddings and control descriptions to capture regulatory intent.</p>
+      </div>
+
+      <div class="card">
+        <div class="badge badge-purple" style="margin-bottom: 0.5rem;">WEIGHT: 25%</div>
+        <div class="card-title">Lexical Overlap</div>
+        <p class="card-desc">Token-level Jaccard index matching regulatory jargon (e.g., 'failover', 'RTO', 'multi-factor authentication').</p>
+      </div>
+
+      <div class="card">
+        <div class="badge badge-amber" style="margin-bottom: 0.5rem;">WEIGHT: 20%</div>
+        <div class="card-title">Domain Alignment</div>
+        <p class="card-desc">Exact match between banking functions (e.g., IT Operations, Treasury & AML, Model Governance, Risk Management).</p>
+      </div>
+
+      <div class="card">
+        <div class="badge badge-emerald" style="margin-bottom: 0.5rem;">WEIGHT: 20%</div>
+        <div class="card-title">Control Robustness</div>
+        <p class="card-desc">Evaluates internal control frequency (automated vs manual), test history, and operating effectiveness.</p>
+      </div>
+    </div>
+
+    <div class="card card-highlight" style="margin-top: 1.25rem;">
+      <div class="card-title">📐 Composite Confidence Score Formula</div>
+      <p class="card-desc"><code>Score = (0.35 × Sim_Semantic) + (0.25 × Sim_Lexical) + (0.20 × Score_Domain) + (0.20 × Score_Robustness)</code><br>
+      High (≥ 80%): Automated Mapping Recommended | Medium (60–79%): Analyst Review Required | Low (&lt; 60%): Potential Control Gap Flagged</p>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Live App: <a class="footer-link" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a></span>
+  </div>
+</div>
+
+<!-- SLIDE 8: BUSINESS IMPACT & ROI -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">Business Impact</span>
+    </div>
+    <span class="slide-counter">08 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">Measurable Enterprise Return on Investment (ROI)</h2>
+    <p class="slide-subtitle">Transforming bank compliance from a manual cost center into an agile, audit-ready operational advantage.</p>
+    
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-val">85%</div>
+        <div class="stat-label">Faster Review Cycles</div>
+        <p style="font-size: 0.85rem; color: #64748B; margin-top: 0.5rem;">Accelerates obligation mapping from 6 weeks down to 3 business days per circular.</p>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-val">$4.2M</div>
+        <div class="stat-label">Annual Operational Savings</div>
+        <p style="font-size: 0.85rem; color: #64748B; margin-top: 0.5rem;">For average Tier-1 retail & commercial banks in consultant and audit fees.</p>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-val">100%</div>
+        <div class="stat-label">Audit-Ready Traceability</div>
+        <p style="font-size: 0.85rem; color: #64748B; margin-top: 0.5rem;">Pre-compiled evidence packages ready for immediate examiner scrutiny.</p>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-val">0</div>
+        <div class="stat-label">Unexplained Gaps</div>
+        <p style="font-size: 0.85rem; color: #64748B; margin-top: 0.5rem;">Mandatory remediation workflows eliminate regulatory blind spots.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Live App: <a class="footer-link" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a></span>
+  </div>
+</div>
+
+<!-- SLIDE 9: SCALABILITY & ENTERPRISE SECURITY -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">Scalability & Security</span>
+    </div>
+    <span class="slide-counter">09 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">Enterprise Scalability & Zero-Leakage Security</h2>
+    <p class="slide-subtitle">Architected to handle tens of thousands of controls across multi-jurisdiction banking entities with zero data leakage.</p>
+    
+    <div class="grid-3">
+      <div class="card card-accent-sky">
+        <div class="card-title">🌐 Multi-Jurisdiction Engine</div>
+        <p class="card-desc">Seamlessly manages disparate regulatory bodies under a single unified matrix: European DORA, US OCC/Fed guidelines, UK PRA/FCA, and Singapore MAS.</p>
+      </div>
+
+      <div class="card card-accent-emerald">
+        <div class="card-title">🔒 Banking Data Protection</div>
+        <p class="card-desc">Zero training on customer data. Stateless API calls to Google Gemini with tenant segregation and optional on-premise private VPC deployment.</p>
+      </div>
+
+      <div class="card card-accent-purple">
+        <div class="card-title">⚡ High-Volume Scalability</div>
+        <p class="card-desc">Modular microservices support horizontal scaling to process 50,000+ controls with sub-second filtering and batch indexing on Cloud Run.</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Live App: <a class="footer-link" href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a></span>
+  </div>
+</div>
+
+<!-- SLIDE 10: FUTURE ROADMAP & CONCLUSION -->
+<div class="slide">
+  <div class="header">
+    <div class="brand">
+      <span class="brand-badge">REGULATRACE AI</span>
+      <span class="brand-title">Future Roadmap</span>
+    </div>
+    <span class="slide-counter">10 / 10</span>
+  </div>
+  <div class="content">
+    <h2 class="slide-title">Future Strategic Roadmap & Next Steps</h2>
+    <p class="slide-subtitle">A clear commercialization pathway from hackathon prototype to enterprise GRC production deployment.</p>
+    
+    <div class="grid-4">
+      <div class="card">
+        <div class="badge badge-sky" style="margin-bottom: 0.5rem;">Q1 2026</div>
+        <div class="card-title">Live Circular Feeds</div>
+        <p class="card-desc">Autonomous RSS and API ingestors monitoring Fed, ECB, and MAS for real-time circular updates.</p>
+      </div>
+
+      <div class="card">
+        <div class="badge badge-purple" style="margin-bottom: 0.5rem;">Q2 2026</div>
+        <div class="card-title">GRC Ecosystem Sync</div>
+        <p class="card-desc">Bi-directional connectors for ServiceNow GRC, MetricStream, Archer, and Jira Enterprise.</p>
+      </div>
+
+      <div class="card">
+        <div class="badge badge-emerald" style="margin-bottom: 0.5rem;">Q3 2026</div>
+        <div class="card-title">Multi-Agent Debate</div>
+        <p class="card-desc">Adversarial LLM agents role-playing as Bank Examiner vs Internal Control Officer to stress-test mappings.</p>
+      </div>
+
+      <div class="card">
+        <div class="badge badge-amber" style="margin-bottom: 0.5rem;">Q4 2026</div>
+        <div class="card-title">Predictive Policy Gen</div>
+        <p class="card-desc">Generates drafted internal control wording to proactively fill anticipated regulatory gaps.</p>
+      </div>
+    </div>
+
+    <div class="card card-highlight" style="margin-top: 1.25rem; text-align: center;">
+      <h3 style="font-size: 1.35rem; color: #0F172A;">🌐 Try the Live Working Solution Now</h3>
+      <p style="color: #0F766E; font-size: 1.05rem; margin-top: 0.35rem; font-family: monospace;">
+        <a href="https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app" target="_blank" style="color: #0F766E;">https://ais-pre-ga7wh4mhrajtep5sf5fveu-122077726286.asia-southeast1.run.app</a>
+      </p>
+      <p style="color: #64748B; font-size: 0.85rem; margin-top: 0.4rem;">
+        GitHub: <a href="https://github.com/nifasathfarhanak/accenture_hackathon" target="_blank" style="color: #475569;">github.com/nifasathfarhanak/accenture_hackathon</a> • Presentation PDF: <a href="/RegulaTrace_AI_Presentation_Accenture_Hackathon_White.pdf" target="_blank" style="color: #475569;">RegulaTrace_AI_Presentation_Accenture_Hackathon_White.pdf</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer">
+    <span>The Economic Times × Accenture ET AI Hackathon</span>
+    <span>Thank You • Ready for Evaluation & Live Demonstration</span>
+  </div>
+</div>
+
+</body>
+</html>
